@@ -37,3 +37,24 @@ require "nvchad.autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+-- the wildmenu is the autocomplete for commands
+-- wilder.nvim just makes that better
+local wilder = require('wilder')
+wilder.setup({modes = {':', '/', '?'}})
+wilder.set_option('renderer', wilder.popupmenu_renderer({
+  -- highlighter applies highlighting to the candidates
+  min_width = '100%', -- minimum height of the popupmenu, can also be a number
+  max_height= '25%', -- to set a fixed height, set max_height to the same value
+  reverse = 0,
+  highlighter = wilder.basic_highlighter(),
+}))
+
+-- leap mappings
+-- I went into this plugin's source code at ~/.local/share/nvim/lazy/leap.nvim/lua/leap/user.lua
+-- and deleted the gs mapping becuase it keeps throwing an error message when I start nvim
+-- about conflicts with the gs command. Not sure if it's nvChad or neovim itself
+require('leap').create_default_mappings()
+
+
+
